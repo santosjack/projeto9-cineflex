@@ -112,7 +112,7 @@ export default function Session ({props}) {
                 </div>
                 <div>
                     <label htmlFor="cpf">CPF do comprador: </label>
-                    <input type="number" name="cpf" onChange={e => setCpf(e.target.value)} value={cpf} required placeholder='Digite seu CPF...'/>
+                    <input type="number" name="cpf" onChange={e => setCpf(e.target.value)} value={cpf} minLength={11} required placeholder='Digite seu CPF...'/>
                 </div>
                 <div>
                 <input type="number" name="seats" defaultValue={ticket.seats.length} required hidden />
