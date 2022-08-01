@@ -1,0 +1,39 @@
+.home{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.home > div{
+    width: 100%;
+}
+
+.home > :first-child{
+    height: 110px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.home > :last-child{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start;
+}
+
+.movie{
+    width: 145px;
+    height: 209px;
+    margin-top: 11px;
+    background-color: #FFFFFF;
+    box-shadow: 0px 2px 4px 2px rgba(0, 0, 0, 0.1);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.movie img{
+    width: 129px;
+    height: 193px;
+}

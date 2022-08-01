@@ -1,0 +1,29 @@
+.footer{
+    max-width: 100%;
+    height: 117px;
+    background-color: #DFE6ED;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer > :first-child{
+    width: 64px;
+    height: 89px;
+    margin-right: 5px;
+    background-color: #FFFFFF;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.footer img{
+    width: 48px;
+    height: 72px;
+}
+
+.footer > :last-child{
+    font-size: 26px;
+    line-height: 30px;
+    text-overflow: ellipsis;
+}
