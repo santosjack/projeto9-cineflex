@@ -19,14 +19,16 @@ export default function Home ({props}) {
                 movie: null,
                 session: null,
                 seats: [],
-                client: {name: null, cpf: null}});
+                client: {name: null, cpf: null},
+                isConfirmed: false
+            });
             console.log(ticket);
             setMovies(r.data);
         }
         ).catch(
 
         );
-    },[ticket.isConfirmed]);
+    },[]);
 
 
     function Movie (obj){

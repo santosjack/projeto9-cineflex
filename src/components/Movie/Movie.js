@@ -27,7 +27,7 @@ export default function Movie ({props}) {
         ).catch(
 
         );
-    },[ticket.isConfirmed]);
+    },[]);
 
     function Session(obj){
         return(

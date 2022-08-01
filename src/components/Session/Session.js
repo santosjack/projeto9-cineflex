@@ -10,6 +10,9 @@ export default function Session ({props}) {
     const {ticket, setTicket} = props;
 
     const [seats, setSeats] = useState(null);
+    
+    let selectedSeats = [];
+
 
     const navigate = useNavigate();
     
@@ -18,36 +21,51 @@ export default function Session ({props}) {
 
         resp.then( r => {
             setSeats(r.data.seats);
+            r.data.seats.map(i => selectedSeats.push(i));
+            console.log(selectedSeats);
         }
         ).catch(
 
         );
-    },[ticket.isConfirmed]);
+    },[]);
 
-   function setSeat (seat) {
-    seat.setSelected(!seat.selected);
-    if(seat.obj.isAvailable){
-        let newSeats = [];
-   
-        newSeats = ticket.seats.filter( item => item.id !== seat.obj.id );
-        console.log("valor da new: "+newSeats);
-        if(newSeats.length < ticket.seats.length){
-            setTicket({...ticket, seats: newSeats});
-        }else{
-            setTicket({...ticket, seats: [...ticket.seats, seat.obj]});
-        }
-    
-    }
-    console.log(ticket.seats);
-   }
 
     function Seat(obj){
         const [ selected, setSelected ] = useState(false);
 
+        function setSeat (seat) {
+
+            if(seat.isAvailable){
+                let newSeats = [];
+           
+                newSeats = selectedSeats.filter( item => item.id !== seat.id );
+                console.log("valor da new: "+newSeats);
+                if(newSeats.length < selectedSeats.length){
+                    selectedSeats = newSeats;
+                }else{
+                    selectedSeats = [...selectedSeats, seat];
+                }
+            
+            }
+            console.log(selectedSeats);
+        }
+
+        function setClass(seat) {
+            if(seat.isAvailable){
+                if(selected){
+                    return "green";
+                }else{
+                    return "gray";
+                }
+            }else{
+                return "yellow";
+            }
+        }
+
         return(
             <div 
-            className={`seat ${obj.isAvailable ? (selected ? "green" : "gray"): "yellow"}`} 
-            onClick={() => setSeat({obj, setSelected, selected})}>
+            className={`seat ${setClass(obj)}`} 
+            onClick={() => {setSelected(!selected); setSeat(obj);}}>
                 {obj.name}
             </div>
         )
@@ -59,12 +77,12 @@ export default function Session ({props}) {
 
         function finish(e){
             e.preventDefault();
-            if(ticket.seats.length === 0){
+            if(selectedSeats.length === 0){
                 alert("Selecione pelo menos 1 assento!");
             }else{
                 console.log(name, cpf, ticket.seats.length);
-                    let seats = ticket.seats.map(i => i.id);
-                
+                    let seats = selectedSeats.map(i => i.id);
+                    console.log(selectedSeats);
                     const resp = axios.post(`https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many`, {
                         ids: seats,
                         name: name,
@@ -73,7 +91,7 @@ export default function Session ({props}) {
             
                     resp.then( r => {
                         if(r.status === 200){
-                            setTicket({...ticket, client: {name: name, cpf: cpf}});
+                            setTicket({...ticket, seats: selectedSeats, client: {name: name, cpf: cpf}});
                             navigate('/sucesso');
                         }else{
                             alert('Não foi possível reservar os assentos, tente novamente')

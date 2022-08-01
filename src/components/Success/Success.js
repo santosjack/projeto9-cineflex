@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import './style.css';
 
 export default function Success ({props}) {
-    console.log(props)
+   
     const {movie, session, seats, client } = props.ticket;
 
     const navigate = useNavigate();
@@ -36,7 +36,7 @@ export default function Success ({props}) {
                 </div>
             </div>
             <div>
-                <button onClick={() => {navigate('/'); props.setTicket({...props.ticket, isConfirmed: !props.ticket.isConfirmed})}}>Voltar para Home</button>
+                <button onClick={() => navigate('/')}>Voltar para Home</button>
             </div>
         </div>
     )

@@ -27,7 +27,7 @@ export default function App () {
                     <Route path='/' element={<Home props={{ticket,setTicket}} />} />
                     <Route path='/filme/:idMovie' element={<><Movie props={{ticket,setTicket}} /> <Footer props={{ticket}} /></>} />
                     <Route path='/sessao/:idSession' element={<><Session props={{ticket,setTicket}} /> <Footer props={{ticket}} /></>} />
-                    <Route path='/sucesso' element={<Success props={{ticket, setTicket}} />} />
+                    <Route path='/sucesso' element={<Success props={{ticket}} />} />
                 </Routes>
             </BrowserRouter>
         </>  
