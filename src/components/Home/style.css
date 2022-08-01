@@ -2,6 +2,7 @@
     width: 100%;
     display: flex;
     flex-direction: column;
+    margin-top: 80px;
 }
 
 .home > div{
@@ -13,6 +14,9 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    font-size: 24px;
+    line-height: 28px;
+    letter-spacing: 0.04em;
 }
 
 .home > :last-child{

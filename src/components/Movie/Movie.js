@@ -7,7 +7,11 @@ import loader from './../../assets/img/loader-icon.svg';
 
 export default function Movie ({props}) {
 
+    
+
     const {ticket, setTicket} = props;
+
+    console.log(ticket)
 
     const [sessions, setSessions] = useState(null);
 

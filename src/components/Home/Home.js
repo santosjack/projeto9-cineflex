@@ -15,6 +15,12 @@ export default function Home ({props}) {
         const resp = axios.get('https://mock-api.driven.com.br/api/v7/cineflex/movies');
 
         resp.then( r => {
+            setTicket({...ticket, 
+                movie: null,
+                session: null,
+                seats: [],
+                client: {name: null, cpf: null}});
+            console.log(ticket);
             setMovies(r.data);
         }
         ).catch(

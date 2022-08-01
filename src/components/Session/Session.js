@@ -29,12 +29,12 @@ export default function Session ({props}) {
     if(seat.obj.isAvailable){
         let newSeats = [];
    
-        newSeats = ticket.seats.filter( item => item !== seat.obj.id );
+        newSeats = ticket.seats.filter( item => item.id !== seat.obj.id );
         console.log("valor da new: "+newSeats);
         if(newSeats.length < ticket.seats.length){
             setTicket({...ticket, seats: newSeats});
         }else{
-            setTicket({...ticket, seats: [...ticket.seats, seat.obj.id]});
+            setTicket({...ticket, seats: [...ticket.seats, seat.obj]});
         }
     
     }
@@ -63,16 +63,21 @@ export default function Session ({props}) {
                 alert("Selecione pelo menos 1 assento!");
             }else{
                 console.log(name, cpf, ticket.seats.length);
-
+                    let seats = ticket.seats.map(i => i.id);
                 
                     const resp = axios.post(`https://mock-api.driven.com.br/api/v7/cineflex/seats/book-many`, {
-                        ids: ticket.seats,
+                        ids: seats,
                         name: name,
                         cpf: cpf
                     });
             
                     resp.then( r => {
-                        console.log(r.statusText, r.data)
+                        if(r.status === 200){
+                            setTicket({...ticket, client: {name: name, cpf: cpf}});
+                            navigate('/sucesso');
+                        }else{
+                            alert('Não foi possível reservar os assentos, tente novamente')
+                        }
                     }
                     ).catch();
             

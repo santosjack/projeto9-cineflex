@@ -6,8 +6,8 @@
     bottom: 0;
     background-color: #DFE6ED;
     display: flex;
-    justify-content: center;
     align-items: center;
+    justify-content: space-around;
 }
 
 .footer > :first-child{
@@ -26,6 +26,7 @@
 }
 
 .footer > :last-child{
+    width: 75%;
     font-size: 26px;
     line-height: 30px;
     text-overflow: ellipsis;
